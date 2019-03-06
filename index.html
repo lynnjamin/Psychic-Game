@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <p>Wins: <span id="win-input">0</span></p>
+    <p>Losses: <span id="loss-input">0</span></p>
+    <p>Guesses Left: <span id="user-guesses">10</span></p>
+    <p>Guesses so far: <span id="user-guess"></span></p>
+
+    <script type="text/javascript">
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        var userGuess = "";
+        var guessedLetter = "";
+        var wins = 0;
+        var losses = 0;
+        var guesses = 9;
+        var randomizedChoices = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+        function reset() {
+            guesses = 10;
+            document.getElementById('user-guesses').innerHTML = guesses;
+            randomizedChoices = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            userGuessed = "";
+            console.log(randomizedChoices);
+        }
+
+        document.onkeyup = function (event) {
+            userGuess = event.key;
+            if (computerChoices.indexOf(userGuess) >= 0) {
+                if (guessedLetter === "") {
+                    guessedLetter = userGuess; // k
+                } else {
+                    guessedLetter = guessedLetter + ", " + userGuess; // k, t
+                }
+                document.getElementById("user-guess").innerHTML = guessedLetter;
+                if (userGuess === randomedChoices) {
+                    wins++;
+                    document.getElementById('win-input').innerHTML = wins;
+                    reset();
+                } else {
+                    guesses--;
+                    document.getElementById('user-guesses').innerHTML = guesses;
+                }
+                if (guesses === 0) {
+                    losses++;
+                    document.getElementById('loss-input').innerHTML = losses;
+                    reset();
+                }
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
